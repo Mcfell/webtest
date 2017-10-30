@@ -8,5 +8,5 @@ import com.yc.myproject.domain.entity.Company;
  * Time: 下午3:22
  */
 public interface CompanyService extends IService<Company>{
-
+    Company getCompany();
 }

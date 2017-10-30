@@ -18,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * User: mcfell.yc
@@ -25,7 +26,7 @@ import java.util.concurrent.TimeUnit;
  * Time: 下午3:07
  */
 @Service
-public class CacheService {
+public class CacheService{
 
     @Autowired
     ServiceHolder serviceHolder;
@@ -35,6 +36,7 @@ public class CacheService {
 
     public static final String APP_TOTAL_NUM = "appTotalNum";
 
+    public static final AtomicInteger onlineUserNum = new AtomicInteger();
 
     private LoadingCache<String, Object> LocalHoursCache = CacheBuilder.newBuilder()
             .maximumSize(10)
@@ -45,6 +47,17 @@ public class CacheService {
                             return loadKey(key);
                         }
                     });
+
+    public void addUserOne(){
+        onlineUserNum.addAndGet(1);
+    }
+    public void decreaseUserOne(){
+        onlineUserNum.addAndGet(1);
+    }
+
+    public Integer getOnlineUserNum(){
+        return onlineUserNum.get();
+    }
 
     private Integer loadUserTotalNum(){
         UserService userService = serviceHolder.getUserService();

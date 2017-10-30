@@ -1,9 +1,11 @@
 package com.yc.myproject.controller;
 
 import com.yc.myproject.domain.DO.StatisticInfoDO;
+import com.yc.myproject.domain.entity.Company;
 import com.yc.myproject.domain.vo.AppVO;
 import com.yc.myproject.domain.vo.UserVO;
 import com.yc.myproject.service.AppService;
+import com.yc.myproject.service.CompanyService;
 import com.yc.myproject.service.UserService;
 import com.yc.myproject.service.sys.CacheService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +34,9 @@ public class ViewController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private CompanyService companyService;
+
     @GetMapping("/apps")
     public String showApps(
             Model model,
@@ -47,8 +52,14 @@ public class ViewController {
         StatisticInfoDO statisticInfoDO = new StatisticInfoDO();
         cacheService.buildStatisticInfo(statisticInfoDO);
         List<UserVO> currentUsers = userService.getCurrentUsers(0, 10);
+        Company company = companyService.getCompany();
+        Integer online = cacheService.getOnlineUserNum();
+        Integer offline = statisticInfoDO.getAllUserNum() - online;
         model.addAttribute("users",currentUsers);
         model.addAttribute("statistic",statisticInfoDO);
+        model.addAttribute("company",company);
+        model.addAttribute("online",online);
+        model.addAttribute("offline",offline);
         return "index";
     }
 

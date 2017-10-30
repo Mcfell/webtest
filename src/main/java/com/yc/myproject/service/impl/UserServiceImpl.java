@@ -59,6 +59,7 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
         new Thread() {
             @Override
             public void run() {
+                cacheService.addUserOne();
                 loginUser.setLastLogin(new Date());
                 loginUser.setStatus(StatusEnum.ONLINE.getVal());
                 mapper.updateByPrimaryKeySelective(loginUser);
@@ -70,6 +71,7 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
     @Override
     public int logout(User user) throws CheckException {
         user.setStatus(StatusEnum.OFFLINE.getVal());
+        cacheService.decreaseUserOne();
         return mapper.updateByPrimaryKeySelective(user);
     }
 

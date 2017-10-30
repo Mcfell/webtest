@@ -35,31 +35,36 @@ public class FileSystemStorageService implements StorageService {
     @Override
     public String store(MultipartFile file) {
         String filename = StringUtils.cleanPath(file.getOriginalFilename());
-        try {
-            if (file.isEmpty()) {
-                throw new StorageException("Failed to store empty file " + filename);
-            }
-            if (filename.contains("..")) {
-                // This is a security check
-                throw new StorageException(
-                        "Cannot store file with relative path outside current directory "
-                                + filename);
-            }
-            int point = filename.lastIndexOf(".");
-            String name = String.valueOf(Math.abs(filename.substring(0,point).hashCode()));
-            String type = filename.substring(point);
-            String time = String.valueOf(new Date().getTime());
-            String newFileName = name+"_"+time+"_"+width+"_"+height+type;
-            Path destFilePath = this.rootLocation.resolve(newFileName);
-            //压缩图片
-            ImgUtils.reduceImg(file.getInputStream(),destFilePath.toAbsolutePath().toString(),width,height,null);
-           /* Files.copy(file.getInputStream(), this.rootLocation.resolve(newFileName),
-                    StandardCopyOption.REPLACE_EXISTING);*/
-            return newFileName;
+        if (file.isEmpty()) {
+            throw new StorageException("Failed to store empty file " + filename);
         }
-        catch (IOException e) {
-            throw new StorageException("Failed to store file " + filename, e);
+        if (filename.contains("..")) {
+            // This is a security check
+            throw new StorageException(
+                    "Cannot store file with relative path outside current directory "
+                            + filename);
         }
+        int point = filename.lastIndexOf(".");
+        String name = String.valueOf(Math.abs(filename.substring(0,point).hashCode()));
+        String type = filename.substring(point);
+        String time = String.valueOf(new Date().getTime());
+        String newFileName = name+"_"+time+"_"+width+"_"+height+type;
+        Path destFilePath = this.rootLocation.resolve(newFileName);
+        //压缩图片
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    ImgUtils.reduceImg(file.getInputStream(),destFilePath.toAbsolutePath().toString(),width,height,null);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+       /* Files.copy(file.getInputStream(), this.rootLocation.resolve(newFileName),
+                StandardCopyOption.REPLACE_EXISTING);*/
+        return newFileName;
+
     }
 
     @Override

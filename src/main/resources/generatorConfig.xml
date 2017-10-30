@@ -94,10 +94,10 @@
 
 
 
-        <table schema="user" tableName="user" enableCountByExample="false"
+        <!--<table schema="user" tableName="user" enableCountByExample="false"
                enableDeleteByExample="false" enableUpdateByExample="false"
                selectByExampleQueryId="false" enableSelectByExample="false">
-            <!-- optional   , only for mybatis3 runtime
+            &lt;!&ndash; optional   , only for mybatis3 runtime
                  自动生成的键值（identity,或者序列值）
                如果指定此元素，MBG将会生成<selectKey>元素，然后将此元素插入到SQL Map的<insert> 元素之中
                sqlStatement 的语句将会返回新的值
@@ -114,46 +114,51 @@
                   JDBC:		This will configure MBG to generate code for MyBatis3 suport of JDBC standard generated keys. This is a database independent method of obtaining the value from identity columns.
                   identity: 自增主键  If true, then the column is flagged as an identity column and the generated <selectKey> element will be placed after the insert (for an identity column). If false, then the generated <selectKey> will be placed before the insert (typically for a sequence).
 
-            -->
+            &ndash;&gt;
             <generatedKey column="id" sqlStatement="Mysql" identity="true" type=""/>
-            <!-- optional.
+            &lt;!&ndash; optional.
                     列的命名规则：
                     MBG使用 <columnRenamingRule> 元素在计算列名的对应 名称之前，先对列名进行重命名，
                     作用：一般需要对BUSI_CLIENT_NO 前的BUSI_进行过滤
                     支持正在表达式
                      searchString 表示要被换掉的字符串
                      replaceString 则是要换成的字符串，默认情况下为空字符串，可选
-            -->
-            <!--<columnRenamingRule searchString="" replaceString=""/>-->
+            &ndash;&gt;
+            &lt;!&ndash;<columnRenamingRule searchString="" replaceString=""/>&ndash;&gt;
 
 
 
-            <!-- optional.告诉 MBG 忽略某一列
+            &lt;!&ndash; optional.告诉 MBG 忽略某一列
                     column，需要忽略的列
                     delimitedColumnName:true ,匹配column的值和数据库列的名称 大小写完全匹配，false 忽略大小写匹配
                     是否限定表的列名，即固定表列在Model中的名称
-            -->
-            <!--<ignoreColumn column="PLAN_ID"  delimitedColumnName="true" />-->
+            &ndash;&gt;
+            &lt;!&ndash;<ignoreColumn column="PLAN_ID"  delimitedColumnName="true" />&ndash;&gt;
 
 
-            <!--optional.覆盖MBG对Model 的生成规则
+            &lt;!&ndash;optional.覆盖MBG对Model 的生成规则
                  column: 数据库的列名
                  javaType: 对应的Java数据类型的完全限定名
                  在必要的时候可以覆盖由JavaTypeResolver计算得到的java数据类型. For some databases, this is necessary to handle "odd" database types (e.g. MySql's unsigned bigint type should be mapped to java.lang.Object).
                  jdbcType:该列的JDBC数据类型(INTEGER, DECIMAL, NUMERIC, VARCHAR, etc.)，该列可以覆盖由JavaTypeResolver计算得到的Jdbc类型，对某些数据库而言，对于处理特定的JDBC 驱动癖好 很有必要(e.g. DB2's LONGVARCHAR type should be mapped to VARCHAR for iBATIS).
                  typeHandler:
 
-            -->
-            <!--<columnOverride column="" javaType=""	jdbcType=""	typeHandler=""	delimitedColumnName="" />-->
-        </table>
+            &ndash;&gt;
+            &lt;!&ndash;<columnOverride column="" javaType=""	jdbcType=""	typeHandler=""	delimitedColumnName="" />&ndash;&gt;
+        </table>-->
 
-        <table schema="app" tableName="app" enableCountByExample="false"
+        <!--<table schema="app" tableName="app" enableCountByExample="false"
                enableDeleteByExample="false" enableUpdateByExample="false"
                selectByExampleQueryId="false" enableSelectByExample="false">
             <generatedKey column="id" sqlStatement="MySql" identity="true" />
-        </table>
+        </table>-->
 
-        <table schema="connect_history" tableName="connect_history" enableCountByExample="false"
+        <!--<table schema="connect_history" tableName="connect_history" enableCountByExample="false"
+               enableDeleteByExample="false" enableUpdateByExample="false"
+               selectByExampleQueryId="false" enableSelectByExample="false">
+            <generatedKey column="id" sqlStatement="MySql" identity="true" />
+        </table>-->
+        <table schema="company" tableName="company" enableCountByExample="false"
                enableDeleteByExample="false" enableUpdateByExample="false"
                selectByExampleQueryId="false" enableSelectByExample="false">
             <generatedKey column="id" sqlStatement="MySql" identity="true" />
