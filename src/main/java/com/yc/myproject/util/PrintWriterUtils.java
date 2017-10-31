@@ -1,7 +1,7 @@
 package com.yc.myproject.util;
 
 import com.yc.myproject.domain.DO.Result;
-import com.yc.myproject.enums.ErrorEnum;
+import com.yc.myproject.enums.ResponseEnum;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -21,7 +21,7 @@ public class PrintWriterUtils {
         writer.close();
     }
 
-    public static void print(HttpServletResponse response, ErrorEnum msg) throws IOException{
+    public static void print(HttpServletResponse response, ResponseEnum msg) throws IOException{
         PrintWriter writer = response.getWriter();
         writer.write(String.valueOf(new Result<>(msg)));
         writer.flush();

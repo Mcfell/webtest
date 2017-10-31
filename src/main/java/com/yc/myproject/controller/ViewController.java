@@ -1,6 +1,7 @@
 package com.yc.myproject.controller;
 
 import com.yc.myproject.domain.DO.StatisticInfoDO;
+import com.yc.myproject.domain.context.MainContext;
 import com.yc.myproject.domain.entity.Company;
 import com.yc.myproject.domain.vo.AppVO;
 import com.yc.myproject.domain.vo.UserVO;
@@ -49,6 +50,9 @@ public class ViewController {
 
     @GetMapping("/")
     public String index(Model model) throws ExecutionException {
+        if (!MainContext.isLogIn()) {
+            return "login";
+        }
         StatisticInfoDO statisticInfoDO = new StatisticInfoDO();
         cacheService.buildStatisticInfo(statisticInfoDO);
         List<UserVO> currentUsers = userService.getCurrentUsers(0, 10);

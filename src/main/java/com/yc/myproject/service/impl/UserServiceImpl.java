@@ -71,7 +71,6 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
     @Override
     public int logout(User user) throws CheckException {
         user.setStatus(StatusEnum.OFFLINE.getVal());
-        cacheService.decreaseUserOne();
         return mapper.updateByPrimaryKeySelective(user);
     }
 

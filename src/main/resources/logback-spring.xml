@@ -41,7 +41,7 @@
     -->
 
     <!-- 用于打印 Spring 在启动的时候初始化各个 Bean 的信息 -->
-    <logger name="org.springframework.web" level="DEBUG"/>
+    <logger name="org.springframework.web" level="INFO"/>
 
     <!-- mybatis 日志打印如果在 ssm 中，可能就需要下边的7行了。-->
     <!-- <logger name="com.ibatis" level="DEBUG" />

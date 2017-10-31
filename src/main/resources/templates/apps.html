@@ -18,9 +18,9 @@
     <!-- jVectorMap -->
     <link href="/production/css/maps/jquery-jvectormap-2.0.3.css" rel="stylesheet"/>
     <!-- PNotify -->
-    <link href="../vendors/pnotify/dist/pnotify.css" rel="stylesheet">
-    <link href="../vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
-    <link href="../vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
+    <link href="/vendors/pnotify/dist/pnotify.css" rel="stylesheet">
+    <link href="/vendors/pnotify/dist/pnotify.buttons.css" rel="stylesheet">
+    <link href="/vendors/pnotify/dist/pnotify.nonblock.css" rel="stylesheet">
     <!-- Custom Theme Style -->
     <link href="/build/css/custom.min.css" rel="stylesheet"/>
   </head>
@@ -28,56 +28,8 @@
   <body class="nav-md">
     <div class="container body">
       <div class="main_container">
-         <!--left menu-->
-        <div class="col-md-3 left_col">
-          <div class="left_col scroll-view">
-            <div class="navbar nav_title" style="border: 0;">
-              <a href="/" class="site_title"><i class="fa fa-paw"></i> <span>后台管理系统</span></a>
-            </div>
-
-            <div class="clearfix"></div>
-
-            <!-- sidebar menu -->
-            <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
-              <div class="menu_section">
-                <ul class="nav side-menu">
-                  <li><a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                    <ul class="nav child_menu">
-                      <li><a href="/">首页</a></li>
-                      <li><a href="/apps">APP管理</a></li>
-                    </ul>
-                  </li>
-                </ul>
-              </div>
-            </div>
-            <!-- /sidebar menu -->
-          </div>
-        </div>
-        <!-- /left menu -->
-        <!-- top navigation -->
-        <div class="top_nav">
-          <div class="nav_menu">
-            <nav class="" role="navigation">
-              <div class="nav toggle">
-                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
-              </div>
-
-              <ul class="nav navbar-nav navbar-right">
-                <li class="">
-                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    Welcome,<span th:text="${session.user.name}"></span>
-                    <span class=" fa fa-angle-down"></span>
-                  </a>
-                  <ul class="dropdown-menu dropdown-usermenu pull-right">
-                    <li><a href="javascript:;">帮助文档</a></li>
-                    <li><a href="/user/logout"><i class="fa fa-sign-out pull-right"></i>退出登录</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </nav>
-          </div>
-        </div>
-        <!-- /top navigation -->
+        <div th:replace="a_leftMenu :: model"></div>
+        <div th:replace="a_topNavigation :: model"></div>
 
         <!-- page content -->
         <div class="right_col" role="main">
@@ -143,25 +95,17 @@
 
           </div>
         </div>
+
+        <!-- Small modal -->
+        <div class="modal fade bs-example-modal-md" tabindex="-1" role="dialog" aria-hidden="true" id="softEditModel">
+          <div class="modal-dialog modal-md">
+            <div class="modal-content">
+            </div>
+          </div>
+        </div>
+        <!-- /modals -->
         <!-- /page content -->
-
-          <!-- Small modal -->
-          <div class="modal fade bs-example-modal-md" tabindex="-1" role="dialog" aria-hidden="true" id="softEditModel">
-              <div class="modal-dialog modal-md">
-                  <div class="modal-content">
-                  </div>
-              </div>
-          </div>
-          <!-- /modals -->
-
-        <!-- footer content -->
-        <footer>
-          <div class="pull-right">
-            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
-          </div>
-          <div class="clearfix"></div>
-        </footer>
-        <!-- /footer content -->
+        <div th:replace="a_footer :: model"></div>
       </div>
     </div>
 

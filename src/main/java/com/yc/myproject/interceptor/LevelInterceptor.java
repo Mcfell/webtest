@@ -1,7 +1,7 @@
 package com.yc.myproject.interceptor;
 
 import com.yc.myproject.domain.context.MainContext;
-import com.yc.myproject.enums.ErrorEnum;
+import com.yc.myproject.enums.ResponseEnum;
 import com.yc.myproject.util.PrintWriterUtils;
 import com.yc.myproject.util.SecurityUtil;
 import org.slf4j.Logger;
@@ -35,12 +35,12 @@ public class LevelInterceptor implements HandlerInterceptor{
         response.setCharacterEncoding("UTF-8");
         //用户未登录
         if (MainContext.isLogOut()) {
-            PrintWriterUtils.print(response, ErrorEnum.NOT_LOGIN);
+            PrintWriterUtils.print(response, ResponseEnum.NOT_LOGIN);
             return false;
         }
         //权限控制
         if (!SecurityUtil.hasPermission(url, MainContext.getLevel())) {
-            PrintWriterUtils.print(response, ErrorEnum.NO_PERMISSION);
+            PrintWriterUtils.print(response, ResponseEnum.NO_PERMISSION);
             return false;
         }
         return true;

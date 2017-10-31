@@ -1,7 +1,7 @@
 package com.yc.myproject.domain.DO;
 
 import com.alibaba.fastjson.JSON;
-import com.yc.myproject.enums.ErrorEnum;
+import com.yc.myproject.enums.ResponseEnum;
 import lombok.Data;
 
 import java.util.List;
@@ -34,9 +34,9 @@ public class Result<T> {
             this.data = data;
         }
     }
-    public Result(ErrorEnum errorEnum) {
-        this.code = errorEnum.getCode();
-        this.msg  = errorEnum.getMsg();
+    public Result(ResponseEnum responseEnum) {
+        this.code = responseEnum.getCode();
+        this.msg  = responseEnum.getMsg();
     }
 
     public Result(int code, String errorMsg) {

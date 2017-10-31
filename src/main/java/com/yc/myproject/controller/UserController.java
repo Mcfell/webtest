@@ -5,17 +5,17 @@ import com.yc.myproject.domain.context.MainContext;
 import com.yc.myproject.domain.context.UserSession;
 import com.yc.myproject.domain.entity.User;
 import com.yc.myproject.domain.vo.UserVO;
-import com.yc.myproject.enums.ErrorEnum;
+import com.yc.myproject.enums.ResponseEnum;
 import com.yc.myproject.exception.CheckException;
 import com.yc.myproject.service.UserService;
 import com.yc.myproject.util.MyBeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -47,7 +47,7 @@ public class UserController {
     @ResponseBody
     public Result<UserVO> login(HttpSession session, User user) throws CheckException {
         if (MainContext.isLogIn()) {
-            throw new CheckException(ErrorEnum.HAS_LOGIN);
+            throw new CheckException(ResponseEnum.HAS_LOGIN);
         }
         User login = userService.login(user);
         if (login != null) {
@@ -55,7 +55,7 @@ public class UserController {
             userSession.setUser(login);
             return new Result<>(MyBeanUtils.convert2UserVO(login));
         } else {
-            throw new CheckException(ErrorEnum.SYSYTEM_ERROR);
+            throw new CheckException(ResponseEnum.SYSYTEM_ERROR);
         }
     }
 
@@ -64,7 +64,7 @@ public class UserController {
     public Result<Integer> logout(HttpSession session) throws CheckException {
         try {
             if (MainContext.isLogOut()) {
-                throw new CheckException(ErrorEnum.HAS_LOGOUT);
+                throw new CheckException(ResponseEnum.HAS_LOGOUT);
             }
             return new Result<>(userService.logout(MainContext.getUser()));
         } finally {
@@ -95,18 +95,24 @@ public class UserController {
 
     /****************** views ************************/
     @RequestMapping("/admin/login")
-    public String adminlogin(RedirectAttributes redirectAttributes, HttpSession session, User user) throws CheckException {
+    public String adminlogin(Model model, HttpSession session, User user){
         if (MainContext.isLogIn()) {
-            redirectAttributes.addAttribute("msg",ErrorEnum.HAS_LOGIN.getMsg());
+            model.addAttribute("msg", ResponseEnum.HAS_LOGIN.getMsg());
             return "login";
         }
-        User login = userService.login(user);
+        User login = null;
+        try {
+            login = userService.login(user);
+        } catch (CheckException e) {
+            model.addAttribute("msg", e.getLocalizedMessage());
+            return "login";
+        }
         if (login != null) {
             session.setAttribute("user",login);
             userSession.setUser(login);
             return "redirect:/";
         } else {
-            redirectAttributes.addAttribute("msg",ErrorEnum.SYSYTEM_ERROR.getMsg());
+            model.addAttribute("msg", ResponseEnum.SYSYTEM_ERROR.getMsg());
             return "login";
         }
     }
@@ -123,13 +129,13 @@ public class UserController {
     }
 
     @RequestMapping("/admin/add")
-    public String saveAdmin(RedirectAttributes redirectAttributes, User user) throws CheckException {
+    public String saveAdmin(Model model, User user) throws CheckException {
         int save = userService.save(user);
         if (save > 0) {
-            redirectAttributes.addAttribute("msg",ErrorEnum.SYSYTEM_ERROR.getMsg());
-            return "redirect:/";
+            model.addAttribute("msg", ResponseEnum.REGISTER_SUCCESS.getMsg());
+            return "login";
         } else {
-
+            model.addAttribute("msg", ResponseEnum.SYSYTEM_ERROR.getMsg());
             return "login";
         }
     }

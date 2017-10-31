@@ -1,6 +1,6 @@
 package com.yc.myproject.exception;
 
-import com.yc.myproject.enums.ErrorEnum;
+import com.yc.myproject.enums.ResponseEnum;
 
 /**
  * User: mcfell.yc
@@ -16,8 +16,8 @@ public class CheckException extends Exception{
         super(message);
     }
 
-    public CheckException(ErrorEnum errorEnum) {
-        super(errorEnum.toString());
+    public CheckException(ResponseEnum responseEnum) {
+        super(responseEnum.toString());
     }
 
     public CheckException(String message, Throwable cause) {
