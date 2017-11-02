@@ -18,7 +18,7 @@ import java.util.Map;
 public class SecurityUtil {
 
     private static final String[] NORMAL_CAN_VISIT = new String[]{"update"};
-    private static final String[] NORMAL_CAN_NOT_VISIT = new String[]{"delete"};
+    private static final String[] NORMAL_CAN_NOT_VISIT = new String[]{"delete","admin"};
 
     private static final String[] ADMIN_CAN_NOT_VISIT = new String[]{};
     private static final String[] ADMIN_CAN_VISIT = new String[]{"admin"};

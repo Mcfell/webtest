@@ -20,7 +20,6 @@ import org.springframework.util.CollectionUtils;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutionException;
 
 /**
  * User: mcfell.yc
@@ -80,7 +79,7 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
     }
 
     @Override
-    public List<UserVO> getCurrentUsers(int page, int rows) throws ExecutionException {
+    public List<UserVO> getCurrentUsers(int page, int rows){
         List<User> users = this.selectAll(page, rows);
         if (users == null) {
             return null;

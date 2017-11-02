@@ -5,7 +5,6 @@ import com.yc.myproject.domain.vo.UserVO;
 import com.yc.myproject.exception.CheckException;
 
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 /**
  * User: mcfell.yc
@@ -21,5 +20,5 @@ public interface UserService extends IService<User>{
 
     int countAll();
 
-    List<UserVO> getCurrentUsers(int page, int rows) throws ExecutionException;
+    List<UserVO> getCurrentUsers(int page, int rows);
 }

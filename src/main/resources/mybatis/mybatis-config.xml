@@ -9,4 +9,10 @@
 		<typeAlias alias="ArrayList" type="java.util.ArrayList" />
 		<typeAlias alias="LinkedList" type="java.util.LinkedList" />
 	</typeAliases>
+	<mappers>
+		<mapper resource="mapper/AppMapper.xml"/>
+		<mapper resource="mapper/CompanyMapper.xml"/>
+		<mapper resource="mapper/ConnectHistoryMapper.xml"/>
+		<mapper resource="mapper/UserMapper.xml"/>
+	</mappers>
 </configuration>

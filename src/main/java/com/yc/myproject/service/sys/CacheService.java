@@ -11,6 +11,8 @@ import com.yc.myproject.service.AppService;
 import com.yc.myproject.service.ConnectAppService;
 import com.yc.myproject.service.ServiceHolder;
 import com.yc.myproject.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,6 +30,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Service
 public class CacheService{
 
+    public static final Logger logger = LoggerFactory.getLogger(CacheService.class);
     @Autowired
     ServiceHolder serviceHolder;
     public static final String CONNECT_HISTORY_MAP = "historyMap";
@@ -103,8 +106,13 @@ public class CacheService{
         statisticInfoDO.setAllAppNum((Integer) LocalHoursCache.get(APP_TOTAL_NUM));
     }
 
-    public Map<Integer, String> getUserAppHistory() throws ExecutionException {
-        return (Map<Integer, String>) LocalHoursCache.get(CONNECT_HISTORY_MAP);
+    public Map<Integer, String> getUserAppHistory(){
+        try {
+            return (Map<Integer, String>) LocalHoursCache.get(CONNECT_HISTORY_MAP);
+        } catch (ExecutionException e) {
+            logger.error("获取用户app使用记录缓存失败",e);
+        }
+        return null;
     }
 
 

@@ -94,6 +94,8 @@ public class UserController {
     }
 
     /****************** views ************************/
+
+
     @RequestMapping("/admin/login")
     public String adminlogin(Model model, HttpSession session, User user){
         if (MainContext.isLogIn()) {

@@ -16,78 +16,73 @@
 
     <link href="../vendors/dropzone/dist/min/dropzone.min.css" rel="stylesheet">
     <!-- Custom Theme Style -->
-    <link href="../build/css/custom.min.css" rel="stylesheet"/>
+    <link href="../build/css/custom.css" rel="stylesheet"/>
 </head>
 
-<body class="nav-md">
+<body class="nav-md" style="-webkit-app-region: drag;">
+<!-- page content -->
+<div class="right_col" role="main">
+    <div class="">
+        <div class="page-title">
+            <div class="title_left">
+                <h3> APP管理 </h3>
+            </div>
+            <div class="title_right">
+                <div class="col-md-5 col-sm-5 col-xs-12 pull-right ">
+                    <button type="button" class="btn addSoftCate pull-right">新增分类</button>
+                </div>
+            </div>
+        </div>
 
+        <div class="clearfix"></div>
 
-<div class="modal-header">
-    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span>
-    </button>
-    <h4 class="modal-title" id="myModalLabel2">新增软件</h4>
-</div>
-<div class="modal-body">
-    <div class="row">
-        <div class="col-md-6 col-lg-6">
-            <form>
-                <div class="form-group" id="uploadForm" enctype='multipart/form-data'>
-                    <div class="fileinput fileinput-new" data-provides="fileinput"  id="exampleInputUpload">
-                        <div class="fileinput-new thumbnail">
-                            <img id='picImg' style="width: 100%;" src="images/noimage.png" alt="" />
+        <div class="row" th:each="app : ${apps}">
+            <div class="col-xs-12 col-md-12">
+                <div class="x_panel">
+                    <div class="x_title">
+                        <h2><i class="fa fa-bars"></i> &nbsp;<span th:text="${app.name}"/></h2>
+                        <ul class="nav navbar-right panel_toolbox">
+                            <li><a class="collapse-link"><i class="fa fa-chevron-up"></i></a></li>
+
+                            <li><a class="softEdit"><i class="fa fa-wrench"></i></a></li>
+                            <!--添加软件-->
+                            <li><a class="addSoft" ><i class="fa fa-plus"></i></a></li>
+
+                            <li><a class="close-link softDelete"><i class="fa fa-close"></i></a></li>
+                        </ul>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div class="x_content">
+                        <div class="row" th:if="${app.softWares != null}">
+                            <div class="col-md-55" th:each="soft : ${app.softWares}">
+                                <div class="thumbnail">
+                                    <div class="image view view-first">
+                                        <img style="width: 100%; display: block;" th:src="'/files/' + ${soft.icon}" alt="image" />
+                                        <div class="mask">
+                                            <p th:text="${soft.host} + ':'+ ${soft.port}"/>
+                                            <div class="tools tools-bottom">
+                                                <a href="#" class="softEdit"><i class="fa fa-pencil"></i></a>
+                                                <a href="#" class="softDelete"><i class="fa fa-times"></i></a>
+                                            </div>
+                                            <input class="softId" type="hidden" th:value="${soft.id}"/>
+                                        </div>
+                                    </div>
+                                    <div class="caption">
+                                        <p th:text="${soft.name}"/>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;"></div>
-                        <div>
-                            <span class="btn btn-primary btn-file">
-                                <span class="fileinput-new">选择文件</span>
-                                <span class="fileinput-exists">换一张</span>
-                                <input type="file" name="pic1" id="picID" accept="image/gif,image/jpeg,image/jpg,image/x-png,image/png"/>
-                            </span>
-                            <a href="javascript:;" class="btn btn-warning fileinput-exists" data-dismiss="fileinput">移除</a>
-                            <button type="button" id="uploadSubmit" class="btn btn-info">上传</button>
-                        </div>
+
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
 
-        <div class=" col-md-6 col-lg-6">
-            <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="name">名称:
-                </label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="name" name="name" required="required" class="form-control col-md-7 col-xs-12">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="icon">图片:
-                </label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="icon" name="icon" required="required" class="form-control col-md-7 col-xs-12">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="host">ip:
-                </label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="host" name="host" required="required" class="form-control col-md-7 col-xs-12">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-md-3 col-sm-3 col-xs-12" for="port">端口:
-                </label>
-                <div class="col-md-6 col-sm-6 col-xs-12">
-                    <input type="text" id="port" name="port" required="required" class="form-control col-md-7 col-xs-12">
-                </div>
-            </div>
-        </div>
     </div>
 </div>
-<div class="modal-footer">
-    <button type="submit" class="btn btn-primary" data-dismiss="modal">Cancel</button>
-    <button type="submit" class="btn btn-success" id="software_form_submit">Submit</button>
-</div>
 
+</body>
 <!-- jQuery -->
 <script src="../vendors/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap -->
@@ -99,5 +94,4 @@
 <script src="../vendors/nprogress/nprogress.js"></script>
 <!-- Dropzone.js -->
 <script src="../vendors/dropzone/dist/min/dropzone.min.js"></script>
-</body>
 </html>

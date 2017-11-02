@@ -34,9 +34,6 @@ public enum ResponseEnum {
 
     @Override
     public String toString() {
-        return "{" +
-                "code=" + code +
-                ", msg='" + msg + '\'' +
-                '}';
+        return msg;
     }
 }

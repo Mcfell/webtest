@@ -1,8 +1,8 @@
 package com.yc.myproject.domain.DO;
 
-import com.google.common.collect.Sets;
+import com.google.common.collect.Lists;
 
-import java.util.Set;
+import java.util.List;
 
 /**
  * User: mcfell.yc
@@ -15,16 +15,16 @@ public class Node<T> {
 
     private Node pre;
 
-    private Set<Node> childs ;
+    private List<Node> childs ;
 
     public Node() {
-        this.childs = Sets.newHashSet();
+        this.childs = Lists.newLinkedList();
     }
 
     public Node(T value, Node pre) {
         this.value = value;
         this.pre = pre;
-        this.childs = Sets.newHashSet();
+        this.childs = Lists.newLinkedList();
     }
 
     public T getValue() {
@@ -43,11 +43,11 @@ public class Node<T> {
         this.pre = pre;
     }
 
-    public Set<Node> getChilds() {
+    public List<Node> getChilds() {
         return childs;
     }
 
-    public void setChilds(Set<Node> childs) {
+    public void setChilds(List<Node> childs) {
         this.childs = childs;
     }
 }

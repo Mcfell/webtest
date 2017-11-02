@@ -1,0 +1,235 @@
+html {
+    background:#505D6E url(../../resource/pic/background.png) no-repeat center center fixed;
+    min-height:100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+body {
+    background:transparent;
+    -webkit-font-smoothing: antialiased;
+    -webkit-app-region: drag;
+    line-height: 1.5em;
+    font-size:14px;
+    font-family: Helvetica, Arial, sans-serif;
+    color:#fff;
+    color:rgba(255,255,255,.8);
+    font-weight: normal;
+    max-width: 960px;
+    max-height: 540px;
+}
+
+ul {
+    padding-left: 0;
+    margin-bottom: 0;
+    margin-top: 0;
+    list-style: none;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: space-around;
+}
+ul>li {
+    display: block;
+    cursor: pointer;
+    position: relative;
+}
+
+.nav>li {
+    position: relative;
+    display: inline-block;
+}
+.nav>li>a {
+    position: relative;
+    display: block;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+.nav>li>a .icon{
+    position: relative;
+    display: block;
+}
+
+.panel_toolbox>li>a {
+    font-size: 14px;
+    width: 24px;
+    height: 24px;
+}
+.panel_toolbox {
+    min-width: 70px;
+    margin-top: 11px;
+}
+.panel_toolbox li{
+    margin-left: 20px;
+}
+.navbar-right {
+    float: right;
+    margin-right: 0px;
+}
+.navbar-left {
+    float: left;
+    margin-left: 0px;
+}
+
+.login_box {
+    margin-right: 20px;
+    margin-top: 11px;
+}
+.login_box .icon{
+    height: 30px;
+    width: 30px;
+    background: url(../../resource/pic/login.png) no-repeat;
+    background-size: 30px 30px;
+    margin-top: -6px;
+}
+
+.login_box .content{
+    font-size: 14px;
+    color: #3bfffd;
+    text-overflow: ellipsis;
+}
+
+.logo_box{
+    margin-top: 11px;
+}
+.logo_box .icon{
+    height: 34px;
+    width: 34px;
+    background: url(../../resource/pic/logo.png) no-repeat;
+    margin-top: -10px;
+}
+.logo_box .content{
+    font-size: 14px;
+    color: #3bfffd;
+    text-overflow: ellipsis;
+}
+.panel_toolbox .min{
+    background: url(../../resource/pic/min.png) no-repeat;
+}
+.panel_toolbox .close{
+    background: url(../../resource/pic/close.png) no-repeat;
+}
+
+.company-box{
+    position: fixed;
+    left: 90px;
+    top:161px;
+    width:376px;
+    height: auto;
+}
+
+.company-box .name{
+    font-size: 21px;
+    color: #1a7f95;
+}
+
+.company-box .detail{
+    font-size: 14px;
+    color: #1a7f95;
+}
+
+.function-box {
+    position: fixed;
+    left: 0px;
+    bottom:0px;
+    width:100%;
+    height: 50px;
+    background-color:rgba(21, 21, 21, 0.75);
+
+}
+
+.function-box .function_btn{
+    position: relative;
+    text-align:center;
+    line-height:15px;
+}
+.function-box>ul>li{
+    width:192px;
+    height: 100%;
+    text-align: center;
+}
+.function_btn .title{
+    margin-left:65px;
+    font-size: 14px;
+    color: #3bfffd;
+    text-overflow: ellipsis;
+    align-items:center;
+    line-height: 3.8em;
+}
+
+.title li{
+    margin-left:4px;
+}
+
+.icon{
+    display: block;
+    width:25px;
+    height:25px;
+}
+
+.icon-analysis{
+    background: url(../../resource/pic/analysis.png) no-repeat;
+    background-size: 25px 25px;
+}
+.icon-reAccident{
+    background: url(../../resource/pic/reAccident.png) no-repeat 40px center;
+    background-size: 25px 25px;
+
+}
+.icon-3d{
+    background: url(../../resource/pic/3d.png) no-repeat 40px center;
+    background-size: 25px 25px;
+}
+.icon-other{
+    background: url(../../resource/pic/other.png) no-repeat 40px center;
+    background-size: 25px 25px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    bottom: 50px;
+    left: 0px;
+    color: #f9f9f9;
+    width: 100%;
+    min-width: 160px;
+    /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.dropdown:hover{
+    color: #f9f9f9;
+    background-color:rgb(57,196,192);
+}
+.dropdown-content>li{
+    width: 100%;
+    height: 40px;
+    background-color:rgb(57,196,192);
+}
+.dropdown-content>li>a{
+    display: block;
+    position: relative;
+    text-align: center;
+    line-height: 3em;
+}
+.dropdown-content>li:hover{
+    background-color:rgba(57,196,192,0.6);
+}
+.login_section{
+    min-width: 280px;
+    min-height: 330px;
+    position: absolute;
+    top:30%;
+    left: 50%;
+    background-color:rgb(57,196,192);
+}

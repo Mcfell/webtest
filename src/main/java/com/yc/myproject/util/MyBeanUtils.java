@@ -8,6 +8,7 @@ import com.yc.myproject.domain.vo.UserVO;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.util.CollectionUtils;
+import org.thymeleaf.util.MapUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -51,7 +52,7 @@ public class MyBeanUtils {
     }
 
     public static List<UserVO> covert2UserVOList(List<User> users,Map<Integer, String> connectMap) {
-        if (CollectionUtils.isEmpty(users)) {
+        if (CollectionUtils.isEmpty(users) || MapUtils.isEmpty(connectMap)) {
             return null;
         }
         List<UserVO> userVOS = Lists.newArrayList();

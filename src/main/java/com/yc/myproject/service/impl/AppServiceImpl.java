@@ -25,7 +25,7 @@ public class AppServiceImpl extends BaseService<App> implements AppService{
     @Override
     public List<AppVO> selectAll(int page, int rows) {
         PageHelper.offsetPage(page,rows);
-        List<App> apps = appMapper.selectAll();
+        List<App> apps = appMapper.selectAllOrderById();
         if (CollectionUtils.isEmpty(apps)) {
             return null;
         }

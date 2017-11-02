@@ -21,7 +21,7 @@ public class MyWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter{
         registry.addInterceptor(new LevelInterceptor()).addPathPatterns("/**").excludePathPatterns(
                 "/user/login","/user/logout"
                 ,"/user/admin/login","/user/admin/logout","/user/admin/add",
-                "/admin/login","/");
+                "/admin/login","/","/uindex");
         super.addInterceptors(registry);
     }
 }

@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>首页</title>
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="/build/css/animate.min.css">
+    <link rel="stylesheet" href="/build/css/login.css">
+    <link rel="stylesheet" href="/build/css/uindex.css">
+
+    <!-- Insert this line above script imports  -->
+    <script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>
+
+    <!-- normal script imports etc  -->
+    <script src="/vendors/jquery/dist/jquery.min.js"></script>
+
+    <!-- Insert this line after script imports -->
+    <script>if (window.module) module = window.module;</script>
+    <!-- jQuery -->
+</head>
+  <body >
+    <header>
+        <div class="x_title">
+            <ul class="nav navbar-left logo_box">
+                <li class="icon"></li>                
+                <li class="content" th:text="${company.name}">司法部司法科学技术鉴定研究所</li>
+            </ul>
+            <ul class="nav navbar-right panel_toolbox">
+                <li><a class="collapse-link min" id="min"></a></li>
+                <li><a class="collapse-link close" id="close"></a></li>
+            </ul>
+            <ul class="nav navbar-right login_box">
+                <li class="icon"></li>
+                <li class="content">
+                    <input type="hidden" id="isLogin" value="1" th:if="${name} != null">
+                    <input type="hidden" id="isLogin" value="0" th:if="${name} == null">
+                    <a th:text="${name}" class="loginName" th:if="${name} != null"></a>
+                    <a th:if="${name} == null" class="loginName">账号登录</a>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <section id="company" class="company-box">
+      <div id="name" class="name" th:text="${company.name}">司法部司法科学技术鉴定研究所简介</div>
+      <p id="detail" class="detail" th:text="${company.detail}"></p>
+    </section>
+    <section id="function" class="function-box">
+      <ul class="nav navbar-left function_btn">
+          <li class="dropdown" th:each="app : ${apps}">
+            <ul class="title nav navbar-left" >
+                <li class="icon icon-analysis"></li>
+                <li class="content"><a th:text="${app.name}"></a></li>
+            </ul>
+            <ul class="dropdown-content nav-vertical" th:if="${app.softWares} != null" >
+              <li th:each="soft : ${app.softWares}">
+                  <a class="app" th:text="${soft.name}"></a>
+                  <input type="hidden" th:value=" ${soft.host}+':'+${soft.port}">
+              </li>
+            </ul>
+          </li>
+      </ul>
+    </section>
+
+  <section id="login" class="login_section" style="display: none;">
+      <div th:replace="u_login :: model"></div>
+  </section>
+
+
+    <script>
+        // You can also require other files to run in this process
+        //    require('./renderer.js')
+        var ipcRenderer=require('electron').ipcRenderer;
+        // var isBig=true;//窗口放大还原标示
+        function appClick(){
+//            var apps=window.document.getElementsByClassName("app");
+//            for (var i = 0; i < apps.length; i++) {
+//                var ns = apps[i].nextElementSibling;
+//                console.log(ns.value);
+//                apps[i].addEventListener('click', showalert, false);
+//            }
+
+            //关闭窗口
+            var close = window.document.getElementById("close");
+            close.addEventListener("click",function(){
+                ipcRenderer.send('window-all-closed');
+            },false);
+
+            //最小化
+            var min = window.document.getElementById("min");
+            min.addEventListener("click",function () {
+                ipcRenderer.send('hide-window');
+            },false);
+        }
+        window.addEventListener('load', appClick, false);
+
+        $(".loginSubmit").on("click", function () {
+            var loginName = $("#loginName").val();
+            var loginPwd = $("#loginPwd").val();
+            jQuery.ajax({
+                type: 'post',
+                url: '/user/login',
+                dataType: 'json',
+                data: {
+                    name: loginName,
+                    pwd: loginPwd
+                },
+                success: function (data) {
+                    if (data.code >= 0) {
+                        $(".login_section").hide();
+                        $(".loginName").html(data.data.name);
+                        $("#isLogin").val(1);
+                    } else {
+                        $("#loginMsg").html(data.msg)
+                    }
+                },
+                error: function (data) {
+                    $("#loginMsg").html(data.msg)
+                }
+            });
+        })
+        $(".loginName").on("click",function () {
+            if ($("#isLogin").val() == 0) {
+                $(".login_section").show();
+            }
+        });
+        $(".app").on("click",function () {
+            if ($("#isLogin").val() == 0) {
+                $(".login_section").show();
+            } else {
+                var msg = this.nextElementSibling.value;
+                ipcRenderer.send("connect-remote",msg);
+            }
+        });
+
+    </script>
+  </body>
+
+</html>
