@@ -43,7 +43,7 @@ public class CacheService{
 
     private LoadingCache<String, Object> LocalHoursCache = CacheBuilder.newBuilder()
             .maximumSize(10)
-            .expireAfterWrite(1, TimeUnit.HOURS)
+            .expireAfterWrite(1, TimeUnit.MINUTES)
             .build(
                     new CacheLoader<String, Object>() {
                         public Object load(String key) throws Exception {
@@ -55,7 +55,7 @@ public class CacheService{
         onlineUserNum.addAndGet(1);
     }
     public void decreaseUserOne(){
-        onlineUserNum.addAndGet(1);
+        onlineUserNum.decrementAndGet();
     }
 
     public Integer getOnlineUserNum(){

@@ -121,13 +121,10 @@ public class UserController {
 
     @RequestMapping("/admin/logout")
     public String adminLogout(HttpSession session, User user) throws CheckException {
-        try {
-            return "login";
-        } finally {
-            if (session != null) {
-                session.invalidate();
-            }
+        if (session != null) {
+            session.invalidate();
         }
+        return "login";
     }
 
     @RequestMapping("/admin/add")

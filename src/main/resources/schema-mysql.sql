@@ -47,5 +47,12 @@ CREATE TABLE IF NOT EXISTS company(
     `gmt_update` DATETIME DEFAULT '1000-01-01 00:00:00' COMMENT 'gmtUpdate',
     PRIMARY KEY (`id`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT 'company';
-
+/*BEGIN
+DECLARE num INT;
+SELECT COUNT(*) into num from company;
+IF num < 1
+THEN
+  INSERT INTO company(name,detail) values("test","testdetail");
+end IF;
+END;*/
 

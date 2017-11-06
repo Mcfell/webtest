@@ -52,13 +52,13 @@ public class MyBeanUtils {
     }
 
     public static List<UserVO> covert2UserVOList(List<User> users,Map<Integer, String> connectMap) {
-        if (CollectionUtils.isEmpty(users) || MapUtils.isEmpty(connectMap)) {
+        if (CollectionUtils.isEmpty(users)) {
             return null;
         }
         List<UserVO> userVOS = Lists.newArrayList();
         for (User user : users) {
             UserVO userVO = convert2UserVO(user);
-            if (connectMap.containsKey(user.getId())) {
+            if (connectMap !=null && connectMap.containsKey(user.getId())) {
                 userVO.setApps(connectMap.get(user.getId()));
             }
             userVOS.add(userVO);
