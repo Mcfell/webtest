@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.yc</groupId>
-	<artifactId>myproject</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>judicial</artifactId>
+	<version>1.0.0</version>
 	<packaging>jar</packaging>
 
-	<name>myproject</name>
-	<description>Demo project for Spring Boot</description>
+	<name>JudicialSoftware</name>
+	<description>Judicial Software web application</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -42,6 +42,15 @@
 			<scope>test</scope>
 		</dependency>
 
+		<!--<dependency>-->
+			<!--<groupId>org.springframework.boot</groupId>-->
+			<!--<artifactId>spring-boot-starter-security</artifactId>-->
+		<!--</dependency>-->
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
 
 		<!--<dependency>-->
 			<!--<groupId>org.springframework.boot</groupId>-->
@@ -133,11 +142,11 @@
 		</dependency>
 
         <!--系统状态-->
-        <dependency>
+        <!--<dependency>
             <groupId>org.hyperic</groupId>
             <artifactId>sigar</artifactId>
             <version>1.6.4</version>
-        </dependency>
+        </dependency>-->
 
 	</dependencies>
 
@@ -172,17 +181,61 @@
 				</dependencies>
 			</plugin>
 
-			<plugin>
+			<!--<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<dependencies>
-					<!-- spring热部署-->
+					&lt;!&ndash; spring热部署&ndash;&gt;
                     <dependency>
                         <groupId>org.springframework</groupId>
                         <artifactId>springloaded</artifactId>
                         <version>1.2.8.RELEASE</version>
                     </dependency>
 				</dependencies>
+			</plugin>-->
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+					<encoding>UTF-8</encoding>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<classpathPrefix>target/classes/</classpathPrefix>
+							<mainClass>com.yc.myproject.MyprojectApplication</mainClass>
+						</manifest>
+					</archive>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<version>2.10</version>
+				<executions>
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>target/lib</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 
 		</plugins>
