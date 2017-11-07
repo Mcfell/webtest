@@ -1,11 +1,12 @@
 package com.yc.myproject.util;
 
-import com.sun.image.codec.jpeg.JPEGCodec;
-import com.sun.image.codec.jpeg.JPEGImageEncoder;
-
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * User: mcfell.yc
@@ -16,7 +17,7 @@ public class ImgUtils {
 
     public static void reduceImg(InputStream inputStream, String imgdist, int widthdist,
                                  int heightdist, Float rate) {
-        FileOutputStream out = null;
+//        FileOutputStream out = null;
         try {
             // 检查文件是否存在
             // 如果rate不为空说明是按比例压缩
@@ -40,15 +41,19 @@ public class ImgUtils {
                     src.getScaledInstance(widthdist, heightdist,
                             Image.SCALE_SMOOTH), 0, 0, null);
 
-            out = new FileOutputStream(imgdist);
-            JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
-            encoder.encode(tag);
+//            out = new FileOutputStream(imgdist);
+//            JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
+//            encoder.encode(tag);
+            saveImage(tag,imgdist);
+            String formatName = imgdist.substring(imgdist.lastIndexOf(".") + 1);
+            ImageIO.write(tag,formatName,new File(imgdist));
+
             System.out.println("cost:"+(System.currentTimeMillis() - start));
         } catch (IOException ex) {
             ex.printStackTrace();
         } finally {
             try {
-                out.close();
+//                out.close();
                 inputStream.close();
             } catch (IOException e) {
                 e.printStackTrace();
@@ -92,10 +97,11 @@ public class ImgUtils {
                     src.getScaledInstance(widthdist, heightdist,
                             Image.SCALE_SMOOTH), 0, 0, null);
 
-            FileOutputStream out = new FileOutputStream(imgdist);
-            JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
-            encoder.encode(tag);
-            out.close();
+//            FileOutputStream out = new FileOutputStream(imgdist);
+//            JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
+//            encoder.encode(tag);
+//            out.close();
+            saveImage(tag,imgdist);
             System.out.println("cost:"+(System.currentTimeMillis() - start));
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -138,6 +144,14 @@ public class ImgUtils {
         return result;
     }
 
+    private static void saveImage(BufferedImage dstImage, String dstName) throws IOException {
+        String formatName = dstName.substring(dstName.lastIndexOf(".") + 1);
+        //FileOutputStream out = new FileOutputStream(dstName);
+        //JPEGImageEncoder encoder = JPEGCodec.createJPEGEncoder(out);
+        //encoder.encode(dstImage);
+        ImageIO.write(dstImage, /*"GIF"*/ formatName /* format desired */ , new File(dstName) /* target */ );
+    }
+
     public static void main(String[] args) {
         /**
          * d://3.jpg 源图片
@@ -150,7 +164,7 @@ public class ImgUtils {
         System.out.println("压缩图片开始...");
         File srcfile = new File(orgin);
         System.out.println("压缩前srcfile size:" + srcfile.length());
-        reduceImg(orgin,dest, 1400, 800,5.0f);
+        reduceImg(orgin,dest, 200, 100,5.0f);
         File distfile = new File(dest);
         System.out.println("压缩后distfile size:" + distfile.length());
 
