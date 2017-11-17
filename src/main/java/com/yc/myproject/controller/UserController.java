@@ -5,6 +5,7 @@ import com.yc.myproject.domain.context.MainContext;
 import com.yc.myproject.domain.context.UserSession;
 import com.yc.myproject.domain.entity.User;
 import com.yc.myproject.domain.vo.UserVO;
+import com.yc.myproject.enums.LevelEnum;
 import com.yc.myproject.enums.ResponseEnum;
 import com.yc.myproject.exception.CheckException;
 import com.yc.myproject.service.UserService;
@@ -129,6 +130,7 @@ public class UserController {
 
     @RequestMapping("/admin/add")
     public String saveAdmin(Model model, User user) throws CheckException {
+        //user.setLevel(LevelEnum.ADMINISTRATOR.getVal());
         int save = userService.save(user);
         if (save > 0) {
             model.addAttribute("msg", ResponseEnum.REGISTER_SUCCESS.getMsg());

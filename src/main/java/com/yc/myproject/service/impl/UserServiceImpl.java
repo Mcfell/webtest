@@ -1,6 +1,7 @@
 package com.yc.myproject.service.impl;
 
 import com.github.pagehelper.PageHelper;
+import com.yc.myproject.domain.context.MainContext;
 import com.yc.myproject.domain.entity.User;
 import com.yc.myproject.domain.vo.UserVO;
 import com.yc.myproject.enums.LevelEnum;
@@ -51,6 +52,9 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
     @Override
     public User login(User user) throws CheckException {
         CheckUtils.checkUser(user);
+        if (MainContext.isLogIn(user.getName())){
+            throw new CheckException("该用户已在其他地方登录");
+        }
         User loginUser = mapper.selectOne(user);
         if (loginUser == null) {
             throw new CheckException("用户名或密码错误");
@@ -58,7 +62,7 @@ public class UserServiceImpl extends BaseService<User> implements UserService {
         new Thread() {
             @Override
             public void run() {
-                cacheService.addUserOne();
+                cacheService.addUserOne(loginUser.getName());
                 loginUser.setLastLogin(new Date());
                 loginUser.setStatus(StatusEnum.ONLINE.getVal());
                 mapper.updateByPrimaryKeySelective(loginUser);

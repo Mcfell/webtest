@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap -->
+    <!-- Font Awesome -->
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="../static/build/css/animate.min.css">
+    <!-- Custom Theme Style -->
+    <!--<link rel="stylesheet" href="../static/build/css/login.css">-->
+
+    <title>后台登录| </title>
+      <style>
+
+          input::-webkit-input-placeholder{
+              color: #15ecff;
+              font-size:14px;
+          }
+          .login_content{
+              background: url(../resource/pic/loginBG.png) no-repeat;
+              width:350px;
+              height:300px;
+              text-align: center;
+              position:relative;
+          }
+          .login_content input{
+              background:rgb(5,61,80);
+              border: 2px solid #15ecff;
+              width:208px;
+              height:8px;
+              padding:9px;
+              color:#ffffff;
+              font-size:14px;
+          }
+
+          .login_content .msg{
+              color:red;
+              font-size:12px;
+              position:absolute;
+              width:230px;
+              height:30px;
+              top:91px;
+              left: 60px;
+          }
+          .login_content .input-box{
+              position:absolute;
+              width:230px;
+              height:30px;
+              left: 60px;
+          }
+          .login_content .name{
+              top:91px;
+          }
+          .login_content .pwd{
+              top:147px;
+          }
+          .login_content .submit-box{
+              margin-top:30px;
+              position:absolute;
+              width:230px;
+              height:30px;
+              top:177px;
+              left: 60px;
+          }
+
+          .login_content .submit-box .loginSubmit{
+              width:230px;
+              height:30px;
+              border:0px;
+              background:rgb(5,61,80);
+              color:black;
+          }
+
+          .login_content .submit-box .loginSubmit:hover{
+              background-color: #15ecff;
+          }
+      </style>
+  </head>
+
+  <body class="login" th:fragment="model">
+    <div>
+      <div class="login_wrapper">
+        <div class="animate form login_form">
+          <section class="login_content">
+              <div class="msg">
+                  <p style="color: red;" id="loginMsg">输入密码有无</p>
+              </div>
+              <div class="input-box name">
+                <input type="text" name="name" class="form-control" id="loginName" placeholder="输入账号" required="" />
+              </div>
+              <div class="input-box pwd">
+                <input type="password" name="pwd" class="form-control" id="loginPwd" placeholder="输入密码" required="" />
+              </div>
+
+              <div class="submit-box">
+                <button type="submit" class="btn btn-default loginSubmit">登录</button>
+              </div>
+
+              <div class="clearfix"></div>
+          </section>
+        </div>
+      </div>
+    </div>
+
+  </body>
+
+</html>

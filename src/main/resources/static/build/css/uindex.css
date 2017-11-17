@@ -12,7 +12,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -webkit-app-region: drag;
     line-height: 1.5em;
-    font-size:14px;
+    font-size:12px;
     font-family: Helvetica, Arial, sans-serif;
     color:#fff;
     color:rgba(255,255,255,.8);
@@ -61,11 +61,7 @@ ul>li {
     height: 24px;
 }
 .panel_toolbox {
-    min-width: 70px;
-    margin-top: 11px;
-}
-.panel_toolbox li{
-    margin-left: 20px;
+    margin-top: 7px;
 }
 .navbar-right {
     float: right;
@@ -77,35 +73,40 @@ ul>li {
 }
 
 .login_box {
-    margin-right: 20px;
+    margin-right: 15px;
     margin-top: 11px;
 }
 .login_box .icon{
-    height: 30px;
-    width: 30px;
+    height: 24px;
+    width: 24px;
     background: url(../../resource/pic/login.png) no-repeat;
-    background-size: 30px 30px;
+    background-size: 24px 24px;
     margin-top: -6px;
 }
 
 .login_box .content{
     font-size: 14px;
+    margin-top: -2px;
     color: #3bfffd;
     text-overflow: ellipsis;
 }
 
 .logo_box{
     margin-top: 11px;
+    margin-left:10px;
 }
+
 .logo_box .icon{
-    height: 34px;
-    width: 34px;
+    width: 15px;
+    height: 24px;
+    margin-top: -4px;
     background: url(../../resource/pic/logo.png) no-repeat;
-    margin-top: -10px;
 }
 .logo_box .content{
-    font-size: 14px;
-    color: #3bfffd;
+    font-size: 12px;
+    margin-left:4px;
+    margin-top: -2px;
+    color: #26a7aa;
     text-overflow: ellipsis;
 }
 .panel_toolbox .min{
@@ -117,20 +118,22 @@ ul>li {
 
 .company-box{
     position: fixed;
-    left: 90px;
-    top:161px;
-    width:376px;
+    left: 110px;
+    top:214px;
+    width:374px;
     height: auto;
 }
 
 .company-box .name{
-    font-size: 21px;
+    font-size: 18px;
     color: #1a7f95;
 }
 
 .company-box .detail{
-    font-size: 14px;
+    font-size: 12px;
     color: #1a7f95;
+    margin-top:12px;
+    height:86px;
 }
 
 .function-box {
@@ -140,7 +143,6 @@ ul>li {
     width:100%;
     height: 50px;
     background-color:rgba(21, 21, 21, 0.75);
-
 }
 
 .function-box .function_btn{
@@ -197,39 +199,49 @@ ul>li {
 .dropdown-content {
     display: none;
     position: absolute;
-    bottom: 50px;
+    bottom: 70px;
     left: 0px;
-    color: #f9f9f9;
+    color: #b8ffff;
     width: 100%;
     min-width: 160px;
     /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
 }
-.dropdown:hover .dropdown-content {
+.function_btn:hover .dropdown-content {
     display: block;
 }
-.dropdown:hover{
-    color: #f9f9f9;
-    background-color:rgb(57,196,192);
+
+.function_btn:hover{
+    background: url(../../resource/pic/table.png) no-repeat;
+    height:70px;
+    margin-top:-20px;
 }
+
+.function_btn:hover .title{
+    margin-top:20px;
+    color:#b8ffff;
+}
+
 .dropdown-content>li{
     width: 100%;
-    height: 40px;
-    background-color:rgb(57,196,192);
+    height: 18px;
+    padding:8px 0;
+    font-size:12px;
+    color:#b8ffff;
+    background-color:rgba(0, 134, 151, 0.9);
 }
 .dropdown-content>li>a{
     display: block;
     position: relative;
     text-align: center;
-    line-height: 3em;
 }
 .dropdown-content>li:hover{
-    background-color:rgba(57,196,192,0.6);
+    font-size:18px;
 }
 .login_section{
     min-width: 280px;
     min-height: 330px;
     position: absolute;
-    top:30%;
-    left: 50%;
+    top:19%;
+    left:32%;
     background-color:rgb(57,196,192);
 }

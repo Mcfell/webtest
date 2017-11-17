@@ -72,7 +72,8 @@
                       <div class="col-md-55" th:each="soft : ${app.softWares}">
                         <div class="thumbnail">
                           <div class="image view view-first">
-                            <img style="width: 100%; display: block;" th:src="'/files/' + ${soft.icon}" alt="image" />
+                            <img style="width: 100%; display: block;" th:src="'" alt="image" th:if="${soft.icon} == null"/>
+                            <img style="width: 100%; display: block;" th:src="'/files/' + ${soft.icon}" alt="image" th:if="${soft.icon} != null"/>
                             <div class="mask">
                               <p th:text="${soft.host} + ':'+ ${soft.port}"/>
                               <div class="tools tools-bottom">

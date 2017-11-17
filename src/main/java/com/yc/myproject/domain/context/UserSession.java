@@ -37,7 +37,7 @@ public class UserSession implements DisposableBean{
 
     @Override
     public void destroy() throws Exception {
-        cacheService.decreaseUserOne();
+        cacheService.decreaseUserOne(user.getName());
         userService.logout(user);
     }
 }

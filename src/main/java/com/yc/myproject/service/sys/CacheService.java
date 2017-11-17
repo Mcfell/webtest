@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -39,6 +40,8 @@ public class CacheService{
 
     public static final String APP_TOTAL_NUM = "appTotalNum";
 
+    public static final ConcurrentHashMap<String, Integer> onlineUserMap = new ConcurrentHashMap<>();
+
     public static final AtomicInteger onlineUserNum = new AtomicInteger();
 
     private LoadingCache<String, Object> LocalHoursCache = CacheBuilder.newBuilder()
@@ -50,16 +53,24 @@ public class CacheService{
                             return loadKey(key);
                         }
                     });
-
-    public void addUserOne(){
-        onlineUserNum.addAndGet(1);
+    public void addUserOne(String user) {
+        if (onlineUserMap.containsKey(user)) {
+            return;
+        }
+        onlineUserMap.put(user,1);
     }
-    public void decreaseUserOne(){
-        onlineUserNum.decrementAndGet();
+    public void decreaseUserOne(String user) {
+        onlineUserMap.remove(user);
+    }
+    public static boolean hasLogin(String name) {
+        if (onlineUserMap.containsKey(name)) {
+            return true;
+        }
+        return false;
     }
 
     public Integer getOnlineUserNum(){
-        return onlineUserNum.get();
+        return onlineUserMap.size();
     }
 
     private Integer loadUserTotalNum(){

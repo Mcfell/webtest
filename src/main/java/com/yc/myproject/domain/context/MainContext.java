@@ -2,6 +2,7 @@ package com.yc.myproject.domain.context;
 
 import com.yc.myproject.domain.entity.User;
 import com.yc.myproject.enums.LevelEnum;
+import com.yc.myproject.service.sys.CacheService;
 import com.yc.myproject.util.SpringUtil;
 
 /**
@@ -16,6 +17,10 @@ public class MainContext {
             return true;
         }
         return false;
+    }
+
+    public static boolean isLogIn(String name) {
+        return CacheService.hasLogin(name);
     }
 
     public static boolean isLogIn() {

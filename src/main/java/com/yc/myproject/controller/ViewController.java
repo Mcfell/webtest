@@ -74,6 +74,7 @@ public class ViewController {
         cacheService.buildStatisticInfo(statisticInfoDO);
         Integer online = cacheService.getOnlineUserNum();
         Integer offline = statisticInfoDO.getAllUserNum() - online;
+        offline = offline < 0 ? 0 : offline;
         model.addAttribute("users",currentUsers);
         model.addAttribute("statistic",statisticInfoDO);
         model.addAttribute("company",company);
