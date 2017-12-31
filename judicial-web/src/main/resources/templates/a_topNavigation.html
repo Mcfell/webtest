@@ -1,0 +1,37 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<body>
+        <!-- top navigation -->
+        <div class="top_nav" th:fragment="model">
+          <div class="nav_menu">
+            <nav class="" role="navigation">
+              <div class="nav toggle">
+                <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+              </div>
+
+              <ul class="nav navbar-nav navbar-right">
+                <li class="">
+                  <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                    <span th:if="${session.user.name} != null">Welcome,<span th:text="${session.user.name}">John Doe</span></span>
+                    <span th:if="${session.user.name} == null">请先登录</span>
+                    <span class=" fa fa-angle-down"></span>
+                  </a>
+
+                  <ul class="dropdown-menu dropdown-usermenu pull-right">
+                    <li><a href="/admin/login">登录注册</a></li>
+                    <li><a href="/user/admin/logout"><i class="fa fa-sign-out pull-right"></i>退出登录</a></li>
+                    <li><a href="javascript:;">帮助文档</a></li>
+                  </ul>
+                </li>
+
+              </ul>
+            </nav>
+          </div>
+        </div>
+        <!-- /top navigation -->
+
+      </div>
+    </div>
+
+  </body>
+</html>

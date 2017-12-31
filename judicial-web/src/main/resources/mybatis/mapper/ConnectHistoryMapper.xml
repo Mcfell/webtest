@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yc.myproject.mapper.ConnectHistoryMapper">
+  <resultMap id="ConnectHistoryMap" type="com.yc.myproject.domain.entity.ConnectHistory">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="userId" jdbcType="INTEGER" property="userid" />
+    <result column="appId" jdbcType="INTEGER" property="appid" />
+    <result column="appName" jdbcType="VARCHAR" property="appname" />
+    <result column="connect_start" jdbcType="TIMESTAMP" property="connectStart" />
+    <result column="connect_end" jdbcType="TIMESTAMP" property="connectEnd" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    <!--
+      WARNING - @mbggenerated
+    -->
+    id, userId, appId, appName, connect_start, connect_end
+  </sql>
+</mapper>
