@@ -39,14 +39,14 @@
                     <input type="hidden" id="isLogin" value="1" th:if="${name} != null">
                     <input type="hidden" id="isLogin" value="0" th:if="${name} == null">
                     <a th:text="${name}" class="loginName" th:if="${name} != null"></a>
-                    <a th:if="${name} == null" class="loginName">账号登录</a>
+                    <a th:if="${name} == null" class="loginName"><b>账号登录</b></a>
                 </li>
             </ul>
         </div>
     </header>
     <section id="company" class="company-box">
       <div id="name" class="name" th:text="${company.name}">司法部司法科学技术鉴定研究所简介</div>
-      <p id="detail" class="detail" th:text="${company.detail}"></p>
+      <div id="detail" class="detail" th:text="${company.detail}"></div>
     </section>
     <section id="function" class="function-box">
       <ul class="nav navbar-left function_btn">
@@ -68,12 +68,11 @@
   <section id="login" class="login_section" style="display: none;">
       <div th:replace="u_login :: model"></div>
   </section>
-
-
     <script>
+        var ipcRenderer=require('electron').ipcRenderer;
+
         // You can also require other files to run in this process
         //    require('./renderer.js')
-        var ipcRenderer=require('electron').ipcRenderer;
         // var isBig=true;//窗口放大还原标示
         function appClick(){
 //            var apps=window.document.getElementsByClassName("app");
@@ -86,6 +85,25 @@
             //关闭窗口
             var close = window.document.getElementById("close");
             close.addEventListener("click",function(){
+                if(isLogin()) {
+                    jQuery.ajax({
+                        type: 'post',
+                        url: '/user/logout',
+                        dataType: 'json',
+                        success: function (data) {
+                            if (data.code >= 0) {
+                                //$(".login_section").hide();
+                                //(".loginName").html(data.data.name);
+                                $("#isLogin").val(0);
+                            } else {
+                                $("#loginMsg").html(data.msg)
+                            }
+                        },
+                        error: function (data) {
+                            $("#loginMsg").html(data.msg)
+                        }
+                    });
+                }
                 ipcRenderer.send('window-all-closed');
             },false);
 
@@ -100,6 +118,12 @@
         $(".loginSubmit").on("click", function () {
             var loginName = $("#loginName").val();
             var loginPwd = $("#loginPwd").val();
+            if (loginName.length == 0) {
+                $("#loginMsg").html("账号不能为空")
+            }
+            if (loginPwd.length == 1) {
+                $("#loginMsg").html("密码不能为空")
+            }
             jQuery.ajax({
                 type: 'post',
                 url: '/user/login',
@@ -123,12 +147,13 @@
             });
         })
         $(".loginName").on("click",function () {
-            if ($("#isLogin").val() == 0) {
+            if (!isLogin()) {
                 $(".login_section").show();
             }
         });
         $(".app").on("click",function () {
-            if ($("#isLogin").val() == 0) {
+            if (!isLogin()) {
+                $("#loginMsg").html("登录后即可使用app")
                 $(".login_section").show();
             } else {
                 var msg = this.nextElementSibling.value;
@@ -136,6 +161,12 @@
             }
         });
 
+        function isLogin() {
+            if ($("#isLogin").val() == 0){
+                return false;
+            }
+            return true;
+        }
     </script>
   </body>
 
