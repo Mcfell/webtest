@@ -149,6 +149,8 @@
         $(".loginName").on("click",function () {
             if (!isLogin()) {
                 $(".login_section").show();
+            } else {
+                console.log("您已经登录")
             }
         });
         $(".app").on("click",function () {
